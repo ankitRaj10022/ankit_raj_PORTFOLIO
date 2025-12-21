@@ -21,56 +21,39 @@ export default function TerminalLoader({
 }: {
   onComplete?: () => void;
 }) {
+  const [frame, setFrame] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [text, setText] = useState<string[]>([]);
 
   useEffect(() => {
-    let lineIndex = 0;
-
-    const typeLine = async (line: string) => {
-      let current = "";
-      for (let char of line) {
-        current += char;
-        setText((prev) => {
-          const copy = [...prev];
-          copy[copy.length - 1] = current;
-          return copy;
+    const tl = gsap.timeline({
+      repeat: FRAMES.length - 1,
+      onRepeat: () => {
+        setFrame((f) => (f + 1) % FRAMES.length);
+      },
+      onComplete: () => {
+        gsap.to(containerRef.current, {
+          opacity: 0,
+          duration: 0.8,
+          delay: 0.4,
+          onComplete,
         });
-        await new Promise((r) => setTimeout(r, 20));
-      }
-    };
+      },
+    });
 
-    const run = async () => {
-      while (lineIndex < LINES.length) {
-        setText((prev) => [...prev, ""]);
-        await typeLine(LINES[lineIndex]);
-        lineIndex++;
-        await new Promise((r) => setTimeout(r, 300));
-      }
+    tl.to({}, { duration: 0.7 });
 
-      // Fade out
-      gsap.to(containerRef.current, {
-        opacity: 0,
-        duration: 0.8,
-        delay: 0.5,
-        onComplete,
-      });
-    };
-
-    run();
+    return () => tl.kill();
   }, [onComplete]);
 
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-50 bg-black text-green-400 font-mono text-sm p-6 overflow-hidden"
+      className="fixed inset-0 z-50 bg-black text-green-400 font-mono text-sm flex items-center justify-center"
     >
-      {text.map((line, i) => (
-        <div key={i} className="leading-relaxed text-3xl font-bold">
-          {">"} {line}
-        </div>
-      ))}
-      <span className="animate-pulse">█</span>
+      <pre className="leading-tight whitespace-pre">
+{FRAMES[frame]}
+      </pre>
+      <span className="absolute bottom-6 animate-pulse">█</span>
     </div>
   );
 }
