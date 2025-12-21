@@ -3,52 +3,54 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
-const ASCII_LINES = [
-  " █████╗ ███╗   ██╗██╗  ██╗██╗████████╗    ██████╗  █████╗      ██╗",
-  "██╔══██╗████╗  ██║██║ ██╔╝██║╚══██╔══╝    ██╔══██╗██╔══██╗     ██║",
-  "███████║██╔██╗ ██║█████╔╝ ██║   ██║       ██████╔╝███████║     ██║",
-  "██╔══██║██║╚██╗██║██╔═██╗ ██║   ██║       ██╔══██╗██╔══██║██   ██║",
-  "██║  ██║██║ ╚████║██║  ██╗██║   ██║       ██║  ██║██║  ██║╚█████╔╝",
-  "╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝   ╚═╝       ╚═╝  ╚═╝╚═╝  ╚═╝ ╚════╝",
-];
+const FRAMES = [
 
-export default function Loader({
-  onComplete,
-}: {
-  onComplete?: () => void;
-}) {
-  const containerRef = useRef<HTMLDivElement>(null);
+  `    █████╗ ███╗   ██╗██╗  ██╗██╗████████╗   ██████╗  █████╗    ██╗
+  ██╔══██╗████╗  ██║██║ ██╔╝██║╚══██╔══╝    ██╔══██╗██╔══██╗     ██║
+  ███████║██╔██╗ ██║█████╔╝ ██║   ██║       ██████╔╝███████║     ██║
+  ██╔══██║██║╚██╗██║██╔═██╗ ██║   ██║       ██╔══██╗██╔══██║██   ██║
+  ██║  ██║██║ ╚████║██║  ██╗██║   ██║       ██║  ██║██║  ██║╚█████╔╝
+  ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝   ╚═╝       ╚═╝  ╚═╝╚═╝  ╚═╝ ╚════╝
+  `
+  ];
+
+  export default function Loader({
+    onComplete,
+  }: {
+    onComplete?: () => void;
+  }) {
+    const containerRef = useRef<HTMLDivElement>(null);
+  const asciiRef = useRef<HTMLPreElement>(null);
   const cursorRef = useRef<HTMLSpanElement>(null);
-  const [output, setOutput] = useState<string[]>([""]);
 
   useEffect(() => {
-    let line = 0;
-    let char = 0;
+    const tl = gsap.timeline();
 
-    const typeInterval = setInterval(() => {
-      setOutput((prev) => {
-        const copy = [...prev];
+    // Initial state
+    gsap.set(asciiRef.current, {
+      opacity: 0,
+      scale: 0.96,
+      filter: "blur(2px)",
+    });
 
-        if (line >= ASCII_LINES.length) {
-          clearInterval(typeInterval);
-          finish();
-          return copy;
-        }
+    // Boot in
+    tl.to(asciiRef.current, {
+      opacity: 1,
+      scale: 1,
+      filter: "blur(0px)",
+      duration: 0.9,
+      ease: "power3.out",
+    });
 
-        if (!copy[line]) copy[line] = "";
-
-        copy[line] += ASCII_LINES[line][char] || "";
-        char++;
-
-        if (char >= ASCII_LINES[line].length) {
-          char = 0;
-          line++;
-          copy.push("");
-        }
-
-        return copy;
-      });
-    }, 12); // typing speed (lower = faster)
+    // CRT jitter (subtle, infinite)
+    gsap.to(asciiRef.current, {
+      x: () => gsap.utils.random(-1.5, 1.5),
+      y: () => gsap.utils.random(-1, 1),
+      duration: 0.08,
+      repeat: -1,
+      yoyo: true,
+      ease: "none",
+    });
 
     // Cursor blink
     gsap.to(cursorRef.current, {
@@ -59,28 +61,17 @@ export default function Loader({
       ease: "power1.inOut",
     });
 
-    // CRT jitter
-    gsap.to(containerRef.current, {
-      x: () => gsap.utils.random(-1.2, 1.2),
-      y: () => gsap.utils.random(-1, 1),
-      duration: 0.08,
-      repeat: -1,
-      yoyo: true,
-      ease: "none",
+    // Exit animation
+    tl.to(containerRef.current, {
+      opacity: 0,
+      scale: 1.03,
+      duration: 0.8,
+      delay: 1.8,
+      onComplete,
     });
 
-    const finish = () => {
-      gsap.to(containerRef.current, {
-        opacity: 0,
-        scale: 1.03,
-        delay: 1.5,
-        duration: 0.8,
-        onComplete,
-      });
-    };
-
     return () => {
-      clearInterval(typeInterval);
+      tl.kill();
       gsap.killTweensOf("*");
     };
   }, [onComplete]);
@@ -91,12 +82,15 @@ export default function Loader({
       className="fixed inset-0 z-50 bg-black text-green-400 font-mono flex items-center justify-center"
     >
       <div className="relative">
-        <pre className="text-sm leading-tight whitespace-pre">
-          {output.join("\n")}
+        <pre
+          ref={asciiRef}
+          className="text-sm leading-tight whitespace-pre select-none"
+        >
+{FRAMES}
         </pre>
 
         <div className="absolute -bottom-8 left-0 text-green-500">
-          <span>&gt; booting Ankit Raj</span>
+          <span>&gt; loading</span>
           <span ref={cursorRef} className="ml-1">█</span>
         </div>
       </div>
