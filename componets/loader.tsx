@@ -88,7 +88,7 @@ const FRAMES = [
           ref={asciiRef}
           className="text-sm leading-tight whitespace-pre select-none"
         >
-{ASCII}
+{FRAMES}
         </pre>
 
         <div className="absolute -bottom-8 left-0 text-green-500">
