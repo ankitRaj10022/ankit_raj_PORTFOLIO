@@ -1,5 +1,20 @@
-export default function Home() {
+"use client";
+
+import { useState } from "react";
+import TerminalLoader from "./components/TerminalLoader";
+
+export default function HomePage() {
+  const [loading, setLoading] = useState(true);
+
   return (
-    <div>Hello World</div>
+    <>
+      {loading && <TerminalLoader onComplete={() => setLoading(false)} />}
+
+      {!loading && (
+        <main className="h-screen flex items-center justify-center">
+          <h1 className="text-4xl font-bold">App Loaded</h1>
+        </main>
+      )}
+    </>
   );
 }
