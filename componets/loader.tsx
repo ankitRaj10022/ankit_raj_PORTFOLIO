@@ -35,7 +35,7 @@ export default function TerminalLoader({
           copy[copy.length - 1] = current;
           return copy;
         });
-        await new Promise((r) => setTimeout(r, 20));
+        await new Promise((r) => setTimeout(r, 90));
       }
     };
 
