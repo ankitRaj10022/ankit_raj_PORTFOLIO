@@ -65,7 +65,7 @@ function NavItem({
       className="relative group transition-colors"
     >
       {children}
-      <span className="absolute left-0 -bottom-1 h-[1px] w-0 bg-green-400 transition-all duration-300 group-hover:w-full" />
+      <span className="absolute left-0 -bottom-1 h-px w-0 bg-green-400 transition-all duration-300 group-hover:w-full" />
     </Link>
   );
 }
