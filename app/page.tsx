@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import TerminalLoader from "@/componets/loader";
+import Header from "@/componets/header";
 
 export default function HomePage() {
   const [loading, setLoading] = useState(true);
@@ -15,6 +16,8 @@ export default function HomePage() {
           <h1 className="text-4xl font-bold">App Loaded</h1>
         </main>
       )} */}
+
+
     </>
   );
 }
