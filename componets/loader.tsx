@@ -65,7 +65,7 @@ export default function TerminalLoader({
       className="fixed inset-0 z-50 bg-black text-green-400 font-mono text-sm p-6 overflow-hidden"
     >
       {text.map((line, i) => (
-        <div key={i} className="leading-relaxed">
+        <div key={i} className="leading-relaxed text-3xl font-bold">
           {">"} {line}
         </div>
       ))}
