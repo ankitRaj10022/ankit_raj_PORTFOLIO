@@ -21,8 +21,9 @@ const FRAMES = [
   }: {
     onComplete?: () => void;
   }) {
-    const [frame, setFrame] = useState(0);
     const containerRef = useRef<HTMLDivElement>(null);
+  const asciiRef = useRef<HTMLPreElement>(null);
+  const cursorRef = useRef<HTMLSpanElement>(null);
 
     useEffect(() => {
       const tl = gsap.timeline({
