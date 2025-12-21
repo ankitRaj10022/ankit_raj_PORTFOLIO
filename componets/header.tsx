@@ -35,7 +35,7 @@ export default function Header() {
         {/* Nav */}
         <nav className="hidden md:flex gap-8">
           <NavItem href="/">Home</NavItem>
-          <NavItem href="/projects">Projects</NavItem>
+          <NavItem href="/projects">About_Me</NavItem>
           <NavItem href="/playground">Playground</NavItem>
           <NavItem href="/contact">Contact</NavItem>
         </nav>
