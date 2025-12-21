@@ -40,13 +40,13 @@ export default function Header() {
           <NavItem href="/contact">Contact</NavItem>
         </nav>
 
-        {/* CTA */}
+        {/* CTA
         <Link
           href="/login"
           className="border border-green-500/40 px-4 py-1.5 rounded hover:bg-green-500/10 transition"
         >
           Login
-        </Link>
+        </Link> */}
       </div>
     </header>
   );
