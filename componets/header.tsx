@@ -28,7 +28,7 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between text-green-400 font-mono text-sm">
         {/* Logo */}
-        <div className="tracking-wide text-2xl font-bold">
+        <div className="tracking-wide text-3xl font-bold">
           <span className="text-green-500">&gt;</span> Ankit_Raj
         </div>
 
