@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import TerminalLoader from "./components/TerminalLoader";
+import TerminalLoader from "@/componets/loader";
 
 export default function HomePage() {
   const [loading, setLoading] = useState(true);
