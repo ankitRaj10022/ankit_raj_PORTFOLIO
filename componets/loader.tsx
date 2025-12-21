@@ -84,12 +84,9 @@ const FRAMES = [
       <div className="relative">
         <pre
           ref={asciiRef}
-          className="text-sm leading-tight whitespace-pre select-none"
-        >
-{FRAMES}
-        </pre>
+          className="text-sm leading-tight whitespace-pre select-none">{FRAMES}</pre>
 
-        <div className="absolute -bottom-8 left-0 text-green-500">
+        <div className="absolute -bottom-8 left-0 text-green-500 font-bold text-xl">
           <span>&gt; loading</span>
           <span ref={cursorRef} className="ml-1">█</span>
         </div>
