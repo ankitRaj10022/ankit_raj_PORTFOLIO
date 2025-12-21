@@ -10,11 +10,11 @@ export default function HomePage() {
     <>
       {loading && <TerminalLoader onComplete={() => setLoading(false)} />}
 
-      {!loading && (
+      {/* {!loading && (
         <main className="h-screen flex items-center justify-center">
           <h1 className="text-4xl font-bold">App Loaded</h1>
         </main>
-      )}
+      )} */}
     </>
   );
 }
