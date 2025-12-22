@@ -17,10 +17,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Ankit Raj - Portfolio",
-  description: "Ankit Raj's personal portfolio website.",
-};
+// export const metadata: Metadata = {
+//   title: "Ankit Raj - Portfolio",
+//   description: "Ankit Raj's personal portfolio website.",
+// };
 
 export default function RootLayout({children,}: {children: React.ReactNode}){
 
@@ -29,7 +29,7 @@ export default function RootLayout({children,}: {children: React.ReactNode}){
 
   useEffect(() => {
     setLoading(true);
-    const timeout = setTimeout(() => setLoading(false), 2200);
+    const timeout = setTimeout(() => setLoading(false), 22200);
     return () => clearTimeout(timeout);
   }, [pathname]);
 
