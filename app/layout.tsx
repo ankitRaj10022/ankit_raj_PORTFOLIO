@@ -17,8 +17,7 @@ export const metadata: Metadata = {
   description: "I am a Computer Science engineer focused on machine learning, cloud infrastructure, and full-stack development. I build production-oriented systems, including ML-based Network Intrusion Detection Systems, AI-powered platforms, and scalable web applications using React/Next.js, TypeScript, and Python. My work emphasizes clean architecture, measurable performance, and real-world applicability, not surface-level demos.",
 };
 
-export default function RootLayout({children,}: {children: React.ReactNode;
-}, ) {
+export default function RootLayout({children,}: {children: React.ReactNode}){
   return (
     <html lang="en">
       <body
