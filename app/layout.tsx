@@ -1,11 +1,6 @@
-"use client";
-
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import TerminalLoader from "@/componets/TerminalLoader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,27 +12,21 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// export const metadata: Metadata = {
-//   title: "Ankit Raj - Portfolio",
-//   description: "Ankit Raj's personal portfolio website.",
-// };
+export const metadata: Metadata = {
+  title: "Ankit Raj",
+  description: "I am a Computer Science engineer focused on machine learning, cloud infrastructure, and full-stack development. I build production-oriented systems, including ML-based Network Intrusion Detection Systems, AI-powered platforms, and scalable web applications using React/Next.js, TypeScript, and Python. My work emphasizes clean architecture, measurable performance, and real-world applicability, not surface-level demos.",
+};
 
-export default function RootLayout({children,}: {children: React.ReactNode}){
-
-  const pathname = usePathname();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setLoading(true);
-    const timeout = setTimeout(() => setLoading(false), 22200);
-    return () => clearTimeout(timeout);
-  }, [pathname]);
-
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {loading && <TerminalLoader onFinish={() => setLoading(false)} />}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         {children}
       </body>
     </html>
