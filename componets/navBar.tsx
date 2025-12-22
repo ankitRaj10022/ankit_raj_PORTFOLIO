@@ -97,7 +97,7 @@ export default function Navbar() {
                 }}
                 className="
                   absolute -bottom-1 left-0 h-px w-full
-                  bg-gradient-to-r from-transparent via-emerald-400 to-transparent
+                  bg-gradient from-transparent via-emerald-400 to-transparent
                   scale-x-0
                 "
               />
