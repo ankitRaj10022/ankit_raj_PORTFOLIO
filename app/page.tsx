@@ -9,7 +9,7 @@ export default function HomePage() {
 
   return (
     <>
-      {loading && <Loader onComplete={() => setLoading(false)} />}
+      {/* {loading && <Loader onComplete={() => setLoading(false)} />} */}
 
       <Header/>
         <main className="min-h-screen flex items-center justify-center">

@@ -1,4 +1,4 @@
-import Loader from "@/componets/Loader";
+import Loader from "@/componets/loader";
 
 export default function Loading() {
   return (
