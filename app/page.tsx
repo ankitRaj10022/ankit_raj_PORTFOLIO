@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Loader from "@/componets/loader";
+import Loader from "@/componets/AsciiCanvasLoader";
 import Header from "@/componets/header";
 
 export default function HomePage() {
