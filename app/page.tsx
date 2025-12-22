@@ -13,9 +13,13 @@ export default function HomePage() {
       {loading && <Loader onComplete={() => setLoading(false)} />}
 
       <Header/>
+      <Navbar/>
+
+      {!loading && (
         <main className="min-h-screen flex items-center justify-center">
           <h1 className="text-4xl font-bold">Main Content</h1>
         </main>
+      )}
     </>
   );
 }
