@@ -86,7 +86,7 @@ const FRAMES =
           className="text-2xl leading-tight whitespace-pre select-none">{FRAMES}</pre>
 
         <div className="absolute -bottom-8 left-0 text-green-500 font-bold text-xl">
-          <span>&gt; loading</span>
+          <span>&gt; loading portfolio</span>
           <span ref={cursorRef} className="ml-1">█</span>
         </div>
       </div>
