@@ -56,12 +56,10 @@ export default function Navbar() {
     >
       <nav className="flex items-center gap-12 px-10 py-3 font-mono text-[13px] text-emerald-300/90">
 
-        {/* Brand */}
         <div className="tracking-widest text-emerald-400 select-none">
           ANKIT&nbsp;RAJ
         </div>
 
-        {/* Links */}
         <div className="flex gap-8">
           {NAV_ITEMS.map((item, i) => (
             <div
@@ -98,7 +96,7 @@ export default function Navbar() {
                   if (el) underlineRefs.current[i] = el;
                 }}
                 className="
-                  absolute -bottom-1 left-0 h1px] w-full
+                  absolute -bottom-1 left-0 h-px w-full
                   bg-gradient-to-r from-transparent via-emerald-400 to-transparent
                   scale-x-0
                 "
