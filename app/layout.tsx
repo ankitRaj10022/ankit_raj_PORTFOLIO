@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import TerminalLoader from "@/componets/ter";
+import TerminalLoader from "@/componets/TerminalLoader";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
