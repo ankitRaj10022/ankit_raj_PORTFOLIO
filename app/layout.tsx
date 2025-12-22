@@ -29,7 +29,7 @@ export default function RootLayout({children,}: {children: React.ReactNode}){
 
   useEffect(() => {
     setLoading(true);
-    const timeout = setTimeout(() => setLoading(false), 9200);
+    const timeout = setTimeout(() => setLoading(false), 90200);
     return () => clearTimeout(timeout);
   }, [pathname]);
 
