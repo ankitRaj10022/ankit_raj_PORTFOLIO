@@ -56,7 +56,7 @@ export default function AsciiCanvasLoader({ done }: { done?: () => void }) {
     
     gsap.to(scanRef.current, {
       y: "100%",
-      duration: 1.2,
+      duration: 1,
       repeat: -1,
       ease: "none",
     });
