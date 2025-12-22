@@ -2,7 +2,7 @@ from PIL import Image
 
 ASCII_CHARS = "@%#*+=-:. "
 
-def resize(image, new_width=80):
+def resize(image, new_width=800):
     width, height = image.size
     ratio = height / width
     new_height = int(new_width * ratio * 0.55)
