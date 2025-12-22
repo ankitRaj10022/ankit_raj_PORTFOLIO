@@ -78,7 +78,7 @@ export default function Navbar() {
                 })
               }
             >
-              <Link href={item.href}>{item.label}</Link>
+              <Link href={item.href}>{item.name}</Link>
 
               <span
                 ref={(el) => {
