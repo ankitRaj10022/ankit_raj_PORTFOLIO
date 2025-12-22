@@ -13,7 +13,7 @@ def grayify(image):
 
 def pixels_to_ascii(image):
     pixels = image.getdata()
-    return "".join([ASCII_CHARS[pixel // 225] for pixel in pixels])
+    return "".join([ASCII_CHARS[pixel // 15] for pixel in pixels])
 
 def image_to_ascii(path, width=80):
     image = Image.open(path)
