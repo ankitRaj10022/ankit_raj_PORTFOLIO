@@ -26,6 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {loading && <TerminalLoader onFinish={() => setLoading(false)} />}
         {children}
       </body>
     </html>
