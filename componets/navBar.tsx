@@ -46,11 +46,7 @@ export default function Navbar() {
   return (
     <header
       ref={navRef}
-      className="fixed top-4 left-1/2 -translate-x-1/2 z-40
-                 bg-black/40 backdrop-blur-md
-                 border border-green-500/20
-                 rounded-xl"
-    >
+      className="fixed top-4 left-1/2 -translate-x-1/2 z-40 bg-black/40 backdrop-blur-md border border-green-500/20 rounded-xl">
       <nav className="flex items-center gap-10 px-8 py-3 font-mono text-sm text-green-400">
         
         <div className="text-green-500 tracking-wide select-none">
