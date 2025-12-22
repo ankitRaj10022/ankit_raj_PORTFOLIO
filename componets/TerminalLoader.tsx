@@ -1,6 +1,6 @@
 "use client";
 
-import AsciiCanvasLoader from "./AsciiCanvasLoader";
+import AsciiCanvasLoader from "./loader";
 
 export default function TerminalLoader({ onFinish }: { onFinish: () => void }) {
   return (
