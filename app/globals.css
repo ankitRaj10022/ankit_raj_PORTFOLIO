@@ -3,7 +3,3 @@
 body {
   padding-top: 4rem; /* matches header height */
 }
-
-canvas {
-  image-rendering: pixelated;
-}
