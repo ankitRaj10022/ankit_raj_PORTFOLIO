@@ -9,7 +9,8 @@ const NAV_ITEMS = [
   { name: "Home", href: "/" },
   { name: "Skills", href: "/skills" },
   { name: "Projects", href: "/projects" },
-  { name: "Contact_me", href: "/contact_" },
+  { name: "About_me", href: "/about_me" },
+  { name: "Contact_me", href: "/contact_me" },
 ];
 
 export default function Navbar() {
