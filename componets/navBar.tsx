@@ -57,7 +57,6 @@ export default function Navbar() {
           <span className="text-green-400">&gt;</span> ankit-raj
         </div>
 
-        {/* Links */}
         <div className="flex gap-8">
           {NAV_ITEMS.map((item, i) => (
             <div
