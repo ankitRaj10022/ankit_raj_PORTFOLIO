@@ -53,7 +53,7 @@ export default function Navbar() {
           <span className="text-green-400">&gt;</span> ankit-raj
         </div>
 
-        <div className="flex gap-8">
+        <div className="flex gap-8 text-lg">
           {NAV_ITEMS.map((item, i) => (
             <div
               key={item.href}
