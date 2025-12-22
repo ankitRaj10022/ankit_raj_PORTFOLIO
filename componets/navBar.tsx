@@ -21,11 +21,12 @@ export default function Navbar() {
   useEffect(() => {
     gsap.fromTo(
       navRef.current,
-      { y: -24, opacity: 0 },
+      { y: -20, opacity: 0, scale: 0.98 },
       {
         y: 0,
         opacity: 1,
-        duration: 0.9,
+        scale: 1,
+        duration: 1,
         ease: "power3.out",
       }
     );
@@ -33,11 +34,10 @@ export default function Navbar() {
 
   useEffect(() => {
     underlineRefs.current.forEach((el, i) => {
-      const isActive = NAV_ITEMS[i].href === pathname;
+      const active = NAV_ITEMS[i].href === pathname;
       gsap.to(el, {
-        scaleX: isActive ? 1 : 0,
-        transformOrigin: "left center",
-        duration: 0.3,
+        scaleX: active ? 1 : 0,
+        duration: 0.35,
         ease: "power2.out",
       });
     });
@@ -46,14 +46,23 @@ export default function Navbar() {
   return (
     <header
       ref={navRef}
-      className="fixed top-4 left-1/2 -translate-x-1/2 z-40 bg-black/40 backdrop-blur-md border border-green-500/20 rounded-xl">
-      <nav className="flex items-center gap-10 px-8 py-3 font-mono text-sm text-green-400">
-        
-        <div className="text-green-500 text-xl tracking-wide select-none">
-          <span className="text-green-400">&gt;</span> ankit-raj
+      className="
+        fixed top-6 left-1/2 -translate-x-1/2 z-40
+        bg-black/30 backdrop-blur-xl
+        border border-white/10
+        rounded-full
+        shadow-[0_0_40px_rgba(0,255,170,0.05)]
+      "
+    >
+      <nav className="flex items-center gap-12 px-10 py-3 font-mono text-[13px] text-emerald-300/90">
+
+        {/* Brand */}
+        <div className="tracking-widest text-emerald-400 select-none">
+          ANKIT&nbsp;RAJ
         </div>
 
-        <div className="flex gap-8 text-lg">
+        {/* Links */}
+        <div className="flex gap-8">
           {NAV_ITEMS.map((item, i) => (
             <div
               key={item.href}
@@ -61,25 +70,38 @@ export default function Navbar() {
               onMouseEnter={() =>
                 gsap.to(underlineRefs.current[i], {
                   scaleX: 1,
-                  duration: 0.25,
+                  duration: 0.3,
                   ease: "power2.out",
                 })
               }
               onMouseLeave={() =>
                 gsap.to(underlineRefs.current[i], {
                   scaleX: pathname === item.href ? 1 : 0,
-                  duration: 0.25,
+                  duration: 0.3,
                   ease: "power2.in",
                 })
               }
             >
-              <Link href={item.href}>{item.name}</Link>
+              <Link
+                href={item.href}
+                className={`transition-colors ${
+                  pathname === item.href
+                    ? "text-emerald-200"
+                    : "text-emerald-300/70 hover:text-emerald-200"
+                }`}
+              >
+                {item.name}
+              </Link>
 
               <span
                 ref={(el) => {
                   if (el) underlineRefs.current[i] = el;
                 }}
-                className="absolute -bottom-1 left-0 h-px w-full bg-green-400 scale-x-0"
+                className="
+                  absolute -bottom-1 left-0 h1px] w-full
+                  bg-gradient-to-r from-transparent via-emerald-400 to-transparent
+                  scale-x-0
+                "
               />
             </div>
           ))}
