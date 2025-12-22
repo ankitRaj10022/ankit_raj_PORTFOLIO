@@ -1,8 +1,8 @@
 from PIL import Image
 
-ASCII_CHARS = "ankitraj"
+ASCII_CHARS = "@%#*+=-:. "
 
-def resize(image, new_width=150):
+def resize(image, new_width=80):
     width, height = image.size
     ratio = height / width
     new_height = int(new_width * ratio * 0.55)
@@ -13,7 +13,7 @@ def grayify(image):
 
 def pixels_to_ascii(image):
     pixels = image.getdata()
-    return "".join([ASCII_CHARS[pixel // 125] for pixel in pixels])
+    return "".join([ASCII_CHARS[pixel // 25] for pixel in pixels])
 
 def image_to_ascii(path, width=80):
     image = Image.open(path)
