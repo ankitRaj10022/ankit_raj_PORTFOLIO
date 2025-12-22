@@ -15,57 +15,81 @@ const NAV_ITEMS = [
 
 export default function Navbar() {
   const navRef = useRef<HTMLDivElement>(null);
+  const underlineRefs = useRef<HTMLSpanElement[]>([]);
   const pathname = usePathname();
 
   useEffect(() => {
     gsap.fromTo(
       navRef.current,
-      { y: -30, opacity: 0 },
+      { y: -24, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        duration: 0.8,
+        duration: 0.9,
         ease: "power3.out",
-        delay: 0.2,
       }
     );
   }, []);
 
+  useEffect(() => {
+    underlineRefs.current.forEach((el, i) => {
+      const isActive = NAV_ITEMS[i].href === pathname;
+      gsap.to(el, {
+        scaleX: isActive ? 1 : 0,
+        transformOrigin: "left center",
+        duration: 0.3,
+        ease: "power2.out",
+      });
+    });
+  }, [pathname]);
+
   return (
     <header
       ref={navRef}
-      className="fixed top-0 left-0 right-0 z-40 bg-black/70 backdrop-blur border-b border-green-500/20"
+      className="fixed top-4 left-1/2 -translate-x-1/2 z-40
+                 bg-black/40 backdrop-blur-md
+                 border border-green-500/20
+                 rounded-xl"
     >
-      <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between font-mono text-sm text-green-400">
+      <nav className="flex items-center gap-10 px-8 py-3 font-mono text-sm text-green-400">
         
-        {/* Logo */}
-        <div className="tracking-wide text-green-500">
+        <div className="text-green-500 tracking-wide select-none">
           <span className="text-green-400">&gt;</span> ankit-raj
         </div>
 
-        {/* Navigation */}
-        <nav className="flex gap-8">
-          {NAV_ITEMS.map((item) => {
-            const isActive = pathname === item.href;
+        {/* Links */}
+        <div className="flex gap-8">
+          {NAV_ITEMS.map((item, i) => (
+            <div
+              key={item.href}
+              className="relative cursor-pointer"
+              onMouseEnter={() =>
+                gsap.to(underlineRefs.current[i], {
+                  scaleX: 1,
+                  duration: 0.25,
+                  ease: "power2.out",
+                })
+              }
+              onMouseLeave={() =>
+                gsap.to(underlineRefs.current[i], {
+                  scaleX: pathname === item.href ? 1 : 0,
+                  duration: 0.25,
+                  ease: "power2.in",
+                })
+              }
+            >
+              <Link href={item.href}>{item.label}</Link>
 
-            return (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`relative transition-colors ${
-                  isActive ? "text-green-300" : "text-green-500/80"
-                }`}
-              >
-                {item.name}
-                <span
-                  className={`absolute left-0 -bottom-1 h-px bg-green-400 transition-all duration-300
-                    ${isActive ? "w-full" : "w-0 group-hover:w-full"}`}
-                />
-              </Link>
-            );
-          })}
-        </nav>
-      </div>
+              <span
+                ref={(el) => {
+                  if (el) underlineRefs.current[i] = el;
+                }}
+                className="absolute -bottom-1 left-0 h-px w-full bg-green-400 scale-x-0"
+              />
+            </div>
+          ))}
+        </div>
+      </nav>
     </header>
   );
 }
