@@ -27,7 +27,7 @@ def image_to_ascii(path, width=80):
     )
     return ascii_image
 
-ascii_art = image_to_ascii("your-image.jpg", 90)
+ascii_art = image_to_ascii("dino.jpeg", 90)
 
 with open("ascii.txt", "w") as f:
     f.write(ascii_art)
