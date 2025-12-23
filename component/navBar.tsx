@@ -53,7 +53,7 @@ const components: { title: string; href: string; description: string }[] = [
   },
 ]
 
-export function Navbar() {
+export function NavigationMenuDemo() {
   const isMobile = useIsMobile()
 
   return (
@@ -62,7 +62,7 @@ export function Navbar() {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Home</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid gap-2 md:w-400 lg:w-500 lg:grid-cols-[.75fr_1fr]">
+            <ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
                   <a
@@ -93,7 +93,7 @@ export function Navbar() {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Components</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid gap-2 sm:w-400 md:w-500 md:grid-cols-2 lg:w-600">
+            <ul className="grid gap-2 sm:w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[600px]">
               {components.map((component) => (
                 <ListItem
                   key={component.title}
@@ -114,7 +114,7 @@ export function Navbar() {
         <NavigationMenuItem className="hidden md:block">
           <NavigationMenuTrigger>List</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-300 gap-4">
+            <ul className="grid w-[300px] gap-4">
               <li>
                 <NavigationMenuLink asChild>
                   <Link href="#">
@@ -147,7 +147,7 @@ export function Navbar() {
         <NavigationMenuItem className="hidden md:block">
           <NavigationMenuTrigger>Simple</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-200 gap-4">
+            <ul className="grid w-[200px] gap-4">
               <li>
                 <NavigationMenuLink asChild>
                   <Link href="#">Components</Link>
@@ -165,7 +165,7 @@ export function Navbar() {
         <NavigationMenuItem className="hidden md:block">
           <NavigationMenuTrigger>With Icon</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-200 gap-4">
+            <ul className="grid w-[200px] gap-4">
               <li>
                 <NavigationMenuLink asChild>
                   <Link href="#" className="flex-row items-center gap-2">
