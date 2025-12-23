@@ -165,7 +165,7 @@ export function Navbar() {
         <NavigationMenuItem className="hidden md:block">
           <NavigationMenuTrigger>With Icon</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-200px] gap-4">
+            <ul className="grid w-200 gap-4">
               <li>
                 <NavigationMenuLink asChild>
                   <Link href="#" className="flex-row items-center gap-2">
