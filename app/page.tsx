@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Loader from "@/component/loader";
-import {Navbar} from "@/component/navBar";
+import NavBar from "@/component/navBar";
 
 export default function HomePage() {
   const [loading, setLoading] = useState(true);
