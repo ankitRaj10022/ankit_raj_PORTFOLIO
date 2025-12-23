@@ -1,22 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import Loader from "@/app/component/loader";
-import NavBar from "@/app/component/navBar";
+import FunkyLoader from "@/components/loader";
+import "@/styles/funky-loader.css";
 
-export default function HomePage() {
-  const [loading, setLoading] = useState(true);
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const [showLoader, setShowLoader] = useState(true);
 
   return (
-    <>
-      {loading && <Loader onComplete={() => setLoading(false)} />}
-      <NavBar />
-
-      {!loading && (
-        <main className="min-h-screen flex items-center justify-center">
-          <h1 className="text-4xl font-bold text-green-400">Main Content</h1>
-        </main>
-      )}
-    </>
+    <html lang="en">
+      <body>
+        {showLoader && <FunkyLoader onDone={() => setShowLoader(false)} />}
+        {!showLoader && children}
+      </body>
+    </html>
   );
 }
