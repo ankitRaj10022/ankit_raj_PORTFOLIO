@@ -1,95 +1,82 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 
-const FRAMES = 
-  `
- █████╗ ███╗   ██╗██╗  ██╗██╗████████╗    ██████╗  █████╗      ██╗
-██╔══██╗████╗  ██║██║ ██╔╝██║╚══██╔══╝    ██╔══██╗██╔══██╗     ██║
-███████║██╔██╗ ██║█████╔╝ ██║   ██║       ██████╔╝███████║     ██║
-██╔══██║██║╚██╗██║██╔═██╗ ██║   ██║       ██╔══██╗██╔══██║██   ██║
-██║  ██║██║ ╚████║██║  ██╗██║   ██║       ██║  ██║██║  ██║╚█████╔╝
-╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝   ╚═╝       ╚═╝  ╚═╝╚═╝  ╚═╝ ╚════╝
-`;
-
-  export default function Loader({
-    onComplete,
-  }: {
-    onComplete?: () => void;
-  }) {
-    const containerRef = useRef<HTMLDivElement>(null);
-  const asciiRef = useRef<HTMLPreElement>(null);
-  const cursorRef = useRef<HTMLSpanElement>(null);
+export default function Loader({ onComplete }: { onComplete: () => void }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLSpanElement>(null);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const tl = gsap.timeline();
-
-    // Initial state
-    gsap.set(asciiRef.current, {
-      opacity: 0,
-      scale: 0.96,
-      filter: "blur(2px)",
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setTimeout(onComplete, 600);
+      },
     });
 
-    // Boot in
-    tl.to(asciiRef.current, {
-      opacity: 1,
-      scale: 1,
-      filter: "blur(0px)",
-      duration: 0.9,
-      ease: "power3.out",
-    });
+    tl.to(
+      {},
+      {
+        duration: 2.5,
+        ease: "power2.out",
+        onUpdate: function () {
+          setProgress(Math.floor(this.progress() * 100));
+        },
+      }
+    );
 
-    // CRT jitter (subtle, infinite)
-    gsap.to(asciiRef.current, {
-      x: () => gsap.utils.random(-1.5, 1.5),
-      y: () => gsap.utils.random(-1, 1),
-      duration: 0.08,
+    gsap.to(".scanline", {
+      y: "100%",
       repeat: -1,
-      yoyo: true,
+      duration: 1.2,
       ease: "none",
     });
 
-    // Cursor blink
-    gsap.to(cursorRef.current, {
-      opacity: 0,
-      duration: 0.6,
-      repeat: -1,
-      yoyo: true,
-      ease: "power1.inOut",
-    });
-
-    // Exit animation
-    tl.to(containerRef.current, {
-      opacity: 0,
-      scale: 1.03,
-      duration: 0.8,
-      delay: 1.8,
-      onComplete,
-    });
-
-    return () => {
-      tl.kill();
-      gsap.killTweensOf("*");
-    };
+    gsap.fromTo(
+      textRef.current,
+      { opacity: 0.2 },
+      {
+        opacity: 1,
+        repeat: -1,
+        yoyo: true,
+        duration: 0.6,
+        ease: "power1.inOut",
+      }
+    );
   }, [onComplete]);
 
   return (
-    <div
-      ref={containerRef}
-      className="fixed inset-0 z-50 bg-black text-green-400 font-mono flex items-center justify-center"
-    >
-      <div className="relative">
-        <pre
-          ref={asciiRef}
-          className="text-2xl leading-tight whitespace-pre select-none">{FRAMES}</pre>
+    <AnimatePresence>
+      <motion.div
+        ref={containerRef}
+        className="loader-container"
+        initial={{ opacity: 1 }}
+        exit={{ opacity: 0, scale: 0.98 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+      >
+        <div className="scanline" />
 
-        <div className="absolute -bottom-8 left-0 text-green-500 font-bold text-xl">
-          <span>&gt; loading portfolio</span>
-          <span ref={cursorRef} className="ml-1">█</span>
+        <div className="loader-content">
+          <span className="loader-title" ref={textRef}>
+            INITIALIZING SYSTEM
+          </span>
+
+          <div className="loader-bar">
+            <div
+              className="loader-bar-fill"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+
+          <span className="loader-percentage">{progress}%</span>
+
+          <span className="loader-subtext">
+            Loading Portfolio Assets
+          </span>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </AnimatePresence>
   );
 }
