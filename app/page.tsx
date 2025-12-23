@@ -10,7 +10,7 @@ export default function HomePage() {
   return (
     <>
       {loading && <Loader onComplete={() => setLoading(false)} />}
-      <Navbar/>
+      <NavBar />
 
       {!loading && (
         <main className="min-h-screen flex items-center justify-center">
