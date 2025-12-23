@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import FunkyLoader from "@/components/loader";
+import FunkyLoader from "../components/loader";
 import "@/styles/funky-loader.css";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
