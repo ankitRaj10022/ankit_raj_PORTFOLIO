@@ -1,82 +1,44 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
+import { motion } from "framer-motion";
 import gsap from "gsap";
 
-export default function Loader({ onComplete }: { onComplete: () => void }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLSpanElement>(null);
-  const [progress, setProgress] = useState(0);
-
+export default function FunkyLoader({ onDone }: { onDone: () => void }) {
   useEffect(() => {
     const tl = gsap.timeline({
-      onComplete: () => {
-        setTimeout(onComplete, 600);
-      },
+      onComplete: onDone,
     });
 
-    tl.to(
-      {},
-      {
-        duration: 2.5,
-        ease: "power2.out",
-        onUpdate: function () {
-          setProgress(Math.floor(this.progress() * 100));
+    tl.from(".word span", {
+      y: () => gsap.utils.random(-120, 120),
+      x: () => gsap.utils.random(-80, 80),
+      rotate: () => gsap.utils.random(-25, 25),
+      opacity: 0,
+      stagger: 0.04,
+      ease: "power3.out",
+      duration: 0.8,
+    })
+      .to(".cursor", {
+        scaleY: 0,
+        duration: 0.3,
+      })
+      .to(
+        ".loader-bg",
+        {
+          clipPath: "circle(0% at 50% 50%)",
+          duration: 0.8,
+          ease: "power4.inOut",
         },
-      }
-    );
-
-    gsap.to(".scanline", {
-      y: "100%",
-      repeat: -1,
-      duration: 1.2,
-      ease: "none",
-    });
-
-    gsap.fromTo(
-      textRef.current,
-      { opacity: 0.2 },
-      {
-        opacity: 1,
-        repeat: -1,
-        yoyo: true,
-        duration: 0.6,
-        ease: "power1.inOut",
-      }
-    );
-  }, [onComplete]);
+        "-=0.2"
+      );
+  }, [onDone]);
 
   return (
-    <AnimatePresence>
-      <motion.div
-        ref={containerRef}
-        className="loader-container"
-        initial={{ opacity: 1 }}
-        exit={{ opacity: 0, scale: 0.98 }}
-        transition={{ duration: 0.6, ease: "easeInOut" }}
-      >
-        <div className="scanline" />
-
-        <div className="loader-content">
-          <span className="loader-title" ref={textRef}>
-            INITIALIZING SYSTEM
-          </span>
-
-          <div className="loader-bar">
-            <div
-              className="loader-bar-fill"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-
-          <span className="loader-percentage">{progress}%</span>
-
-          <span className="loader-subtext">
-            Loading Portfolio Assets
-          </span>
-        </div>
-      </motion.div>
-    </AnimatePresence>
-  );
-}
+    <motion.div
+      className="loader-bg"
+      initial={{ clipPath: "circle(100% at 50% 50%)" }}
+      exit={{ opacity: 0 }}
+    >
+      <div className="loader-center">
+        <div className="w
