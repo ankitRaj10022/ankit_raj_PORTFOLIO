@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import FunkyLoader from "./component/loader";
-import "@/styles/globals.css";
+import './globals.css';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const [showLoader, setShowLoader] = useState(true);
