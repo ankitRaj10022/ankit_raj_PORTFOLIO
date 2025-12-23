@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Loader from "@/componets/loader";
-import Navbar from "@/componets/navBar";
+import Loader from "@/componet/loader";
+import Navbar from "@/componet/navBar";
 
 export default function HomePage() {
   const [loading, setLoading] = useState(true);
