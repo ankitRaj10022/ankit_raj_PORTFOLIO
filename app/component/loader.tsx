@@ -41,4 +41,14 @@ export default function FunkyLoader({ onDone }: { onDone: () => void }) {
       exit={{ opacity: 0 }}
     >
       <div className="loader-center">
-        <div className="w
+        <div className="word">
+          {"BUILDING IDEAS".split("").map((char, i) => (
+            <span key={i}>{char === " " ? "\u00A0" : char}</span>
+          ))}
+        </div>
+
+        <div className="cursor" />
+      </div>
+    </motion.div>
+  );
+}
